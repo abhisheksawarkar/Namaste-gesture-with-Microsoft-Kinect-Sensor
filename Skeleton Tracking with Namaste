@@ -1,0 +1,22 @@
+  foreach (Skeleton skeleton in skeletons)
+            {
+                if (skeleton.TrackingState == SkeletonTrackingState.Tracked && flag == 0)
+                {
+                    drawSkeleton(skeleton);
+                    float distance1 = jointDistance(skeleton.Joints[JointType.WristLeft], skeleton.Joints[JointType.WristRight]);       //calculates the distance between both wrists and shoulder centre
+                    float distance2 = jointDistance(skeleton.Joints[JointType.WristLeft], skeleton.Joints[JointType.ShoulderCenter]);
+                    float distance3 = jointDistance(skeleton.Joints[JointType.WristRight], skeleton.Joints[JointType.ShoulderCenter]);
+                    text2 = "Person Not Locked";
+                   
+                    if (skeleton != null && this.id != skeleton.TrackingId)
+                    {
+                        if (distance1 < 0.3f && distance2 < 0.3 && distance3 < 0.35f)   //verifies the minimum distance condition and locks onto the person doing Namaste Gesture
+                        {
+                            id = skeleton.TrackingId;
+                            flag = 1;
+                           
+                        }
+                       
+                    }
+                }
+            }
